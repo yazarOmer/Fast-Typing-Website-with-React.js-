@@ -1,4 +1,4 @@
-import { cn } from "../utils";
+import { cn, formatPercentage } from "../utils";
 
 interface ResultsProps {
   errors: number;
@@ -16,12 +16,12 @@ export const Results = ({
   return (
     <ul
       className={cn(
-        "flex flex-col items-center text-orange-200 space-y-3 mt-3",
+        "flex flex-col items-center text-orange-200 space-y-3 mt-3 text-lg",
         className
       )}
     >
       <h2 className="text-xl font-semibold text-pink-500">Results</h2>
-      <li>Accuracy: {accuracyPercentage}</li>
+      <li>Accuracy: {formatPercentage(accuracyPercentage)}</li>
       <li>
         Errors:{" "}
         <span
