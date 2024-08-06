@@ -15,6 +15,7 @@ const useTyping = (enabled: boolean) => {
         if (!enabled || !isKeyAllowed(code)) {
             return
         }
+        console.log(key,code)
 
         switch (key) {
             case "Backspace":
