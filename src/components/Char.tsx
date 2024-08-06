@@ -1,7 +1,22 @@
+import { cn } from "../utils";
+
 interface CharProps {
-  char: string;
+  actual: string;
+  expected: string;
 }
 
-export const Char = ({ char }: CharProps) => {
-  return <span className="text-orange-400">{char}</span>;
+export const Char = ({ actual, expected }: CharProps) => {
+  const isCorrect = actual === expected;
+  const isWhiteSpace = expected === " ";
+  return (
+    <span
+      className={cn({
+        "text-red-500": !isCorrect && !isWhiteSpace,
+        "text-green-500": isCorrect && !isWhiteSpace,
+        "bg-red-500/50 rounded-sm": !isCorrect && isWhiteSpace,
+      })}
+    >
+      {expected}
+    </span>
+  );
 };

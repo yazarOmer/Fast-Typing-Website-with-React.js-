@@ -1,25 +1,34 @@
-import { faker } from "@faker-js/faker";
 import { Words } from "./components/Words";
 import { Timer } from "./components/Timer";
 import { RestartButton } from "./components/RestartButton";
 import { Results } from "./components/Results";
 import { UserTypings } from "./components/UserTypings";
-
-const words = faker.random.words(10);
+import useGame from "./hooks/useGame";
+import { calculateAccuracy } from "./utils";
 
 function App() {
+  const { words, timeLeft, typed, errors, restart, totalTyped, state } =
+    useGame();
   return (
     <div className="max-w-3xl">
-      <Timer time={30} />
+      <Timer time={timeLeft} />
+
       <div className="relative max-w-3xl text-4xl mt-5 mb-10">
         <Words words={words} />
         <UserTypings
           className="absolute inset-0 "
-          userInput={words.split(" ")[0]}
+          userInput={typed}
+          words={words}
         />
       </div>
-      <RestartButton onRestart={() => null} />
-      <Results errors={12} accuracyPercentage={0} total={0} />
+
+      <RestartButton onRestart={restart} />
+      <Results
+        state={state}
+        errors={12}
+        accuracyPercentage={calculateAccuracy(errors, totalTyped)}
+        total={totalTyped}
+      />
     </div>
   );
 }

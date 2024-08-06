@@ -1,3 +1,4 @@
+import { State } from "../hooks/useGame";
 import { cn, formatPercentage } from "../utils";
 
 interface ResultsProps {
@@ -5,14 +6,20 @@ interface ResultsProps {
   accuracyPercentage: number;
   total: number;
   className?: string;
+  state: State;
 }
 
 export const Results = ({
+  state,
   errors,
   accuracyPercentage,
   total,
   className,
 }: ResultsProps) => {
+  if (state !== "finish") {
+    return null;
+  }
+
   return (
     <ul
       className={cn(
